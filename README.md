@@ -1748,32 +1748,46 @@ Commit your code regularly and meaningfully. This helps both you (in case you ev
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. Can you explain your data model, data schema to me?
+Users have a one to many relationship to todos
+todos has a many to one relationship to user
+this means that each user can have multiple todos while many todos can be
+ assigned to a specific user
+ 
 2. Can you explain how you connected your API to a database?
+@Component tells the java system to load the seed data
+@Autowired connects the seed data to specific tables 
 3. Can you explain the flow of data from client through the backend system and back to the client?
+Client will send requests to the backend system. The system checks if the
+ request and data(if there is data sent) is valid, if it is it will return a
+  response to the client
 4. How did you handle querying in your application: custom querying vs JPA Querying?
+Mostly JPA querying if there is no specific jpa querying available i will
+ create a custom query to handle the request
 
 ## Instructions
 
 ### Task 1: Project Set Up
 
-- [ ] Create a forked copy of this project
-- [ ] Add your team lead as collaborator on Github
-- [ ] Clone your OWN version of the repository (Not Lambda's by mistake!)
-- [ ] Create a new branch: git checkout -b `<firstName-lastName>`.
-- [ ] Start with the provided todo application
-- [ ] Push commits: `git push origin <firstName-lastName>`
-- [ ] Implement the project on your newly created `<firstName-lastName>` branch, committing changes regularly
-- [ ] Push commits: git push origin `<firstName-lastName>`
+- [x] Create a forked copy of this project
+- [x] Add your team lead as collaborator on Github
+- [x] Clone your OWN version of the repository (Not Lambda's by mistake!)
+- [x] Create a new branch: git checkout -b `<firstName-lastName>`.
+- [x] Start with the provided todo application
+- [x] Push commits: `git push origin <firstName-lastName>`
+- [] Implement the project on your newly created `<firstName-lastName>` branch, committing changes regularly
+- [x] Push commits: git push origin `<firstName-lastName>`
 
 ### Task 2: Project Requirements
 
 You will be creating a REST api service to store and read data from an H2 database.
 
-- [ ] Please fork and clone this repository. This repository has a starting application called todos. You must start working from there. Regularly commit and push your code as appropriate.
+- [x] Please fork and clone this repository. This repository has a starting
+ application called todos. You must start working from there. Regularly commit and push your code as appropriate.
 
-- [ ] The initial application contains the model for the users table. Endpoints are already created and the structure for auditing fields is in place. You are adding the model for the todos table and updating the services to work with the new table.
+- [x] The initial application contains the model for the users table
+. Endpoints are already created and the structure for auditing fields is in place. You are adding the model for the todos table and updating the services to work with the new table.
 
-- [ ] TODOS
+- [x] TODOS
   - `todoid` primary key, not null long
   - `description` string, not null
   - `completed` boolean. Note that for all new todos, default completed to false
