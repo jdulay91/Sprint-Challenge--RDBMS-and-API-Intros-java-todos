@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 
-@Service(value = "todoService")
+@Service(value = "todosService")
 public class TodosServiceImpl implements TodosService {
 
     @Autowired
@@ -18,5 +18,10 @@ public class TodosServiceImpl implements TodosService {
         Todo completedTodo =
                 todorepos.findById(todoid).orElseThrow(()-> new EntityNotFoundException("Todo Id :" + todoid + " Not Valid!"));
         completedTodo.setCompleted(true);
+    }
+
+    @Override
+    public Todo save(Todo todo) {
+        return todorepos.save(todo);
     }
 }
