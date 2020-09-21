@@ -1,6 +1,8 @@
 package com.lambdaschool.todos.services;
 
+import com.lambdaschool.todos.models.Todo;
 import com.lambdaschool.todos.models.User;
+import com.lambdaschool.todos.repository.TodoRepository;
 import com.lambdaschool.todos.repository.UserRepository;
 import com.lambdaschool.todos.views.UserNameCountTodos;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,9 @@ public class UserServiceImpl implements UserService
      */
     @Autowired
     private UserAuditing userAuditing;
+
+    @Autowired
+    private TodoRepository todorepos;
 
     public User findUserById(long id) throws EntityNotFoundException
     {
@@ -65,11 +70,21 @@ public class UserServiceImpl implements UserService
     {
         User newUser = new User();
 
+        if(user.getUserid() != 0){
+            userrepos.findById(user.getUserid()).orElseThrow(()-> new EntityNotFoundException("User with " + user.getUserid() + " Not Valid!!"));
+            newUser.setUserid(user.getUserid());
+        }
         newUser.setUsername(user.getUsername()
             .toLowerCase());
         newUser.setPassword(user.getPassword());
         newUser.setPrimaryemail(user.getPrimaryemail()
             .toLowerCase());
+
+        newUser.getTodos().clear();
+        for(Todo t : user.getTodos()){
+            Todo newTodo = new Todo(newUser, t.getDescription());
+            newUser.getTodos().add(newTodo);
+        }
 
         return userrepos.save(newUser);
     }
@@ -77,6 +92,7 @@ public class UserServiceImpl implements UserService
     @Override
     public List<UserNameCountTodos> getCountUserTodos()
     {
-        return null;
+        List<UserNameCountTodos> list = userrepos.getCountUserTodos();
+        return list;
     }
 }
